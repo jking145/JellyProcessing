@@ -21,8 +21,8 @@ class Current {
         float tempSize = random(100);
         nodes.add(new Node(new PVector((nodes.get(nodes.size()-1).origin.x)+(nodes.get(nodes.size()-1).getNodeSize()/2+(tempSize/2)), (height/2)), tempSize));
         totalSize += tempSize;
-        println(totalSize);
-        println(nodes.size());
+        //println(totalSize);
+        //println(nodes.size());
       }
     }
   }
