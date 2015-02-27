@@ -12,16 +12,28 @@ class Node {
 
   //Variable which store the size of a Node
   float nodeSize;
-
+  float mass;
+  float gravity;
+  
   //Constructor
   Node(PVector origin_, float nodeSize_) {
     origin = origin_.get();
     nodeSize = nodeSize_;
+    mass = 20;
+    gravity = 1;
     acceleration = new PVector(3, 0);
-    //The attraction value is for now based on the size of the node
-    attraction = new PVector(nodeSize/10, nodeSize/10);
   }
 
+  PVector attract(Mover mover) {
+    PVector force = PVector.sub(origin,mover.origin);
+    float distance = force.mag();
+    distance = constrain(distance,5.0,25.0);
+    force.normalize();
+    float strength = (gravity * ((nodeSize/2)*mass) * mover.mass) / (distance * distance);
+    force.mult(strength);
+    return force;
+  }
+  
   //Display function of a node
   //Will be fully transparent later to hide the current
   void display() {
