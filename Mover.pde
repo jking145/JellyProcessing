@@ -21,7 +21,7 @@ class Mover {
     topspeed = 5;
     //mass = 10;
     //sabine
-    mass =1;
+    mass=1;
   }
 
 
