@@ -2,7 +2,7 @@
 // Daniel Shiffman
 // http://natureofcode.com
 
-class Mover {
+class JellyFish {
 
   // The Mover tracks orign, velocity, and acceleration 
   PVector origin;
@@ -12,7 +12,14 @@ class Mover {
   float topspeed;
   float mass;
 
-  Mover() {
+  //Arraylist to hold the tentacle arrays.
+  ArrayList<Tentacle> tentacles;
+
+  //Number of tentacles.
+  int count = 7;
+
+
+  JellyFish() {
     // Start in the center
     origin = new PVector(width/2, height/2);
     velocity = new PVector(0, 0);
@@ -22,8 +29,10 @@ class Mover {
     //mass = 10;
     //sabine
     mass=1;
-  }
 
+    tentacles = new ArrayList<Tentacle>();
+    buildTentacles();
+  }
 
   PVector getMouseAttractionForce(float mx, float my)
   {
@@ -31,8 +40,15 @@ class Mover {
     PVector mouse = new PVector(mx, my);
     PVector strength = PVector.sub(mouse, origin);
     strength.normalize();
-    strength.mult(0.090);
+    strength.mult(0.1);
     return strength;
+  }
+
+  void display() {
+    for (Tentacle jelly : tentacles) {
+      jelly.drawTentacle();
+      jelly.update();
+    }
   }
 
   void update() {
@@ -45,13 +61,10 @@ class Mover {
     acceleration.mult(0);
   }
 
-
-
-  void display() {
-    stroke(0);
-    strokeWeight(2);
-    fill(127);
-    ellipse(origin.x, origin.y, 48, 48);
+  void buildTentacles() {  
+    for (int i=0; i<count; i++) {
+      tentacles.add(new Tentacle() );
+    }
   }
 
   void applyForce(PVector force) {

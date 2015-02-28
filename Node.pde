@@ -36,12 +36,12 @@ class Node {
     acceleration = new PVector();
   }
 
-  PVector attract(Mover mover) {
-    PVector force = PVector.sub(origin, mover.origin);
+  PVector attract(JellyFish jelly) {
+    PVector force = PVector.sub(origin, jelly.origin);
     float distance = force.mag();
     distance = constrain(distance, 5.0, 25.0);
     force.normalize();
-    float strength = (gravity * ((nodeSize/2)*mass) * mover.mass) / (distance * distance);
+    float strength = (gravity * ((nodeSize/2)*mass) * jelly.mass) / (distance * distance);
     force.mult(strength);
     return force;
   }

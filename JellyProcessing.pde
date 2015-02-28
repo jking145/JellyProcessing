@@ -1,7 +1,7 @@
 //Variables which store the objects instances
 Wave wave;
 Current current;
-Mover mover;
+JellyFish jelly;
 
 //MOD
 Node largestNode;
@@ -27,7 +27,7 @@ void setup() {
   largestNode = current.getLargestNodeInCurrent();
   largestNode.fillColor = color(255,0,0);
   
-  mover = new Mover();
+  jelly = new JellyFish();
   
 }
 
@@ -47,16 +47,17 @@ void draw() {
   current.update();
 
   //MOD
-  PVector attractForceWithLargestNode = largestNode.attract(mover);
+  PVector attractForceWithLargestNode = largestNode.attract(jelly);
   //Apply the force
-  mover.applyForce(attractForceWithLargestNode);
+  jelly.applyForce(attractForceWithLargestNode);
   //Applying the mouse tracking as a force (for now)
-  PVector mForce = mover.getMouseAttractionForce(mouseX,mouseY);
-  mover.applyForce(mForce);
+  PVector mForce = jelly.getMouseAttractionForce(mouseX,mouseY);
+  jelly.applyForce(mForce);
   
-  mover.display();
-  mover.update();
+  jelly.display();
+  jelly.update();
   
+
 }
 
 //Mouse controls of the jelly
