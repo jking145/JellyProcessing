@@ -7,8 +7,8 @@ Mover mover;
 Node largestNode;
 
 //Variables which store the mouse coordinates
-//float mx;
-//float my;
+float mx;
+float my;
 
 //SETUP
 void setup() {
@@ -65,13 +65,13 @@ void mouseReleased() {
 
 }
 
-//void getMouseX() {
-//  mx = mouseX;
-//  println(mx);
-//}
-//
-//void getMouseY() {
-//  my = mouseY;
-//  println(my);
-//}
+void getMouseX() {
+  mx = mouseX;
+  println(mx);
+}
+
+void getMouseY() {
+  my = mouseY;
+  println(my);
+}
 

@@ -31,7 +31,7 @@ class Mover {
     PVector mouse = new PVector(mx, my);
     PVector strength = PVector.sub(mouse, origin);
     strength.normalize();
-    strength.mult(0.04);
+    strength.mult(0.090);
     return strength;
   }
 

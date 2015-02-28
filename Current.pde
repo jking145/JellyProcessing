@@ -36,10 +36,10 @@ class Current {
         //Store the size of the node to keep track of the current size
         float tempSize = random(100);
         //Add nodes after the first one, must be random but without overlapping.
-        // nodes.add(new Node(new PVector((nodes.get(nodes.size()-1).origin.x)-(nodes.get(nodes.size()-1).getNodeSize()/2+(tempSize/2)), (height/2)), tempSize));
+        //nodes.add(new Node(new PVector((nodes.get(nodes.size()-1).origin.x)-(nodes.get(nodes.size()-1).getNodeSize()/2+(tempSize/2)), (height/2)), tempSize));
 
         //p1
-        float nA = nodes.get(nodes.size()-1).origin.x- nodes.get(nodes.size()-1).getNodeSize()/2;
+        float nA = nodes.get(nodes.size()-1).origin.x-nodes.get(nodes.size()-1).getNodeSize()/2;
         nodes.add(new Node(new PVector(nA-(tempSize/2), (height/2)), tempSize));
         //Add the size of the node to the size counter of the current
         totalSize += tempSize;
