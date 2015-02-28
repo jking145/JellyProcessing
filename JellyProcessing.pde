@@ -3,9 +3,12 @@ Wave wave;
 Current current;
 Mover mover;
 
+//MOD
+Node largestNode;
+
 //Variables which store the mouse coordinates
-float mx;
-float my;
+//float mx;
+//float my;
 
 //SETUP
 void setup() {
@@ -19,6 +22,11 @@ void setup() {
   //Create new objects
   wave = new Wave(new PVector(0, 100), width, 40, 220);
   current = new Current();
+  
+  //MOD
+  largestNode = current.getLargestNodeInCurrent();
+  largestNode.fillColor = color(255,0,0);
+  
   mover = new Mover();
   
 }
@@ -31,10 +39,21 @@ void draw() {
   //Apply functions on each objects
   wave.calculate();
   wave.display();
-
+  
+  //MOD
+  current.checkBounds();
   current.display();
+  current.applyForces();
   current.update();
 
+  //MOD
+  PVector attractForceWithLargestNode = largestNode.attract(mover);
+  //Apply the force
+  mover.applyForce(attractForceWithLargestNode);
+  //Applying the mouse tracking as a force (for now)
+  PVector mForce = mover.getMouseAttractionForce(mouseX,mouseY);
+  mover.applyForce(mForce);
+  
   mover.display();
   mover.update();
   
@@ -42,18 +61,17 @@ void draw() {
 
 //Mouse controls of the jelly
 //Have to change the method, not good practice
-void mousePressed() {
-  getMouseX();
-  getMouseY();
+void mouseReleased() {
+
 }
 
-void getMouseX() {
-  mx = mouseX;
-  println(mx);
-}
-
-void getMouseY() {
-  my = mouseY;
-  println(my);
-}
+//void getMouseX() {
+//  mx = mouseX;
+//  println(mx);
+//}
+//
+//void getMouseY() {
+//  my = mouseY;
+//  println(my);
+//}
 
