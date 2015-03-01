@@ -22,13 +22,12 @@ void setup() {
   //Create new objects
   wave = new Wave(new PVector(0, 100), width, 40, 220);
   current = new Current();
-  
+
   //MOD
   largestNode = current.getLargestNodeInCurrent();
-  largestNode.fillColor = color(255,0,0);
-  
+  largestNode.fillColor = color(255, 0, 0);
+
   jelly = new JellyFish();
-  
 }
 
 //DRAW
@@ -39,32 +38,30 @@ void draw() {
   //Apply functions on each objects
   wave.calculate();
   wave.display();
-  
+
   //MOD
-  current.checkBounds();
+  //current.checkBounds();
   current.display();
   current.applyForces();
   current.update();
   current.currentDetect();
+  current.currentIsOnScreen();
 
   //MOD
   PVector attractForceWithLargestNode = largestNode.attract(jelly);
   //Apply the force
   jelly.applyForce(attractForceWithLargestNode);
   //Applying the mouse tracking as a force (for now)
-  PVector mForce = jelly.getMouseAttractionForce(mouseX,mouseY);
+  PVector mForce = jelly.getMouseAttractionForce(mouseX, mouseY);
   jelly.applyForce(mForce);
-  
+
   jelly.display();
   jelly.update();
-  
-
 }
 
 //Mouse controls of the jelly
 //Have to change the method, not good practice
 void mouseReleased() {
-
 }
 
 void getMouseX() {
