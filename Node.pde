@@ -4,7 +4,7 @@
 class Node {
   //PVector which store the location of the node
 
-  PVector origin;
+    PVector origin;
   //PVector which store the acceleration of the node
   //Might be applied on the full array (current) instead
   PVector acceleration;
@@ -36,6 +36,7 @@ class Node {
     acceleration = new PVector();
   }
 
+
   PVector attract(JellyFish jelly) {
     PVector force = PVector.sub(origin, jelly.origin);
     float distance = force.mag();
@@ -45,6 +46,7 @@ class Node {
     force.mult(strength);
     return force;
   }
+
 
   //Display function of a node
   //Will be fully transparent later to hide the current

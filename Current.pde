@@ -70,7 +70,27 @@ class Current {
       nodes.get(i).applyForce(waterPush);
     }
   }
-
+  
+  void currentDetect() {
+    boolean isInCurrent=false;
+    for (int i=0; i < nodes.size (); i++) {
+      float tempNodeX = nodes.get(i).origin.x;
+      float tempNodeY = nodes.get(i).origin.y;
+      float tempNodeSize = nodes.get(i).getNodeSize();
+      //rollover processing.org
+      float disX = tempNodeX - jelly.origin.x;
+      float disY = tempNodeY - jelly.origin.y;
+      
+      if (sqrt(sq(disX) + sq(disY)) < tempNodeSize/2) {
+        isInCurrent=true;
+        println("The jelly IS in the current");
+      }
+      else {
+        isInCurrent=false;
+      }
+    }
+  }
+  
   //sabine add
   //Update the position of each nodes
   void checkBounds() {

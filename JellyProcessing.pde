@@ -45,6 +45,7 @@ void draw() {
   current.display();
   current.applyForces();
   current.update();
+  current.currentDetect();
 
   //MOD
   PVector attractForceWithLargestNode = largestNode.attract(jelly);
