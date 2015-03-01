@@ -6,7 +6,6 @@ class Tentacle {
   float[] a = new float[3];
   float[] b = new float[3];
   float[] c = new float[3];
-  
 
   //Scalar to control speed of tentacle movement.
   float inc = 0;
@@ -39,7 +38,7 @@ class Tentacle {
     tLength = height*random(0.1, 0.3)*scale;
 
     //Opacity.
-    alpha = int(random(10, 100));
+    alpha = int(random(40, 60));
   }
 
   void drawTentacle() {
@@ -51,10 +50,6 @@ class Tentacle {
     translate(jelly.origin.x, jelly.origin.y);
     rotate(tRotate);
 
-    //Aesthetic details.
-    noStroke();
-    fill(255, 166, 249, alpha);
-
     //While loop to keep drawing tentacles to the screen.
     while (x < tLength) {
 
@@ -65,8 +60,21 @@ class Tentacle {
       y = sin(a[0]*x+b[0]+inc)*c[0] + sin(a[1]*x+b[1]+inc)*c[1] + sin(a[2]*x+b[2]+inc)*c[2];
       y = y*A;
 
+      //Aesthetic details.
+      noStroke();
+      fill(219, 177, 255, alpha);
+
       //Ellipses that make up the tentacles.
       ellipse(x, y, r, r);
+
+      //Arc for the jellyfish head.
+      {
+        float h = r*1.4;
+        float g = r*1.9;        
+        arc(0, 0, g, g, PI-HALF_PI, TWO_PI-HALF_PI, OPEN);
+        fill(187, 93, 255);
+        arc(0, 0, h, h, PI-HALF_PI, TWO_PI-HALF_PI, OPEN);
+      }
 
       //Determines the size of the ellipses making up the tentacles. 
       if (r>15)
