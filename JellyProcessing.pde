@@ -6,10 +6,6 @@ JellyFish jelly;
 //MOD
 Node largestNode;
 
-//Variables which store the mouse coordinates
-float mx;
-float my;
-
 //SETUP
 void setup() {
   //Make the sketch 1280 by 720
@@ -44,33 +40,19 @@ void draw() {
   current.display();
   current.applyForces();
   current.update();
-  current.currentDetect();
-  current.currentIsOnScreen();
 
+  if (current.isOnScreen()) {
+    PVector attractForceWithLargestNode = largestNode.attract(jelly);
+    //Apply the force
+    jelly.applyForce(attractForceWithLargestNode);
+  }
+  
   //MOD
-  PVector attractForceWithLargestNode = largestNode.attract(jelly);
-  //Apply the force
-  jelly.applyForce(attractForceWithLargestNode);
+
   //Applying the mouse tracking as a force (for now)
   PVector mForce = jelly.getMouseAttractionForce(mouseX, mouseY);
   jelly.applyForce(mForce);
-
   jelly.display();
   jelly.update();
-}
-
-//Mouse controls of the jelly
-//Have to change the method, not good practice
-void mouseReleased() {
-}
-
-void getMouseX() {
-  mx = mouseX;
-  println(mx);
-}
-
-void getMouseY() {
-  my = mouseY;
-  println(my);
 }
 

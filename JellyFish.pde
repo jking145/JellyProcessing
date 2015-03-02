@@ -40,7 +40,7 @@ class JellyFish {
     PVector mouse = new PVector(mx, my);
     PVector strength = PVector.sub(mouse, origin);
     strength.normalize();
-    strength.mult(0.09);
+    strength.mult(0.1);
     return strength;
   }
 

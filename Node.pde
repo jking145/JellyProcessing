@@ -4,7 +4,7 @@
 class Node {
   //PVector which store the location of the node
 
-    PVector origin;
+  PVector origin;
   //PVector which store the acceleration of the node
   //Might be applied on the full array (current) instead
   PVector acceleration;

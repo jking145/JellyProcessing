@@ -14,6 +14,9 @@ class Current {
   //Variable which will keep track the size of the current
   float totalSize;
 
+  boolean isInCurrent=false;
+  boolean isOnScreen=false;
+  
   //Current constructor
   Current() {
     //currentPos = currentPos_;
@@ -71,36 +74,29 @@ class Current {
     }
   }
 
-  void currentDetect() {
-    boolean isInCurrent=false;
-    for (int i=0; i < nodes.size (); i++) {
-      float tempNodeX = nodes.get(i).origin.x;
-      float tempNodeY = nodes.get(i).origin.y;
-      float tempNodeSize = nodes.get(i).getNodeSize();
-      //rollover processing.org
-      float disX = tempNodeX - jelly.origin.x;
-      float disY = tempNodeY - jelly.origin.y;
+//  boolean isInCurrent() {
+//    for (int i=0; i < nodes.size (); i++) {
+//      float tempNodeX = nodes.get(i).origin.x;
+//      float tempNodeY = nodes.get(i).origin.y;
+//      float tempNodeSize = nodes.get(i).getNodeSize();
+//      //rollover processing.org
+//      float disX = tempNodeX - jelly.origin.x;
+//      float disY = tempNodeY - jelly.origin.y;
+//      if (sqrt(sq(disX) + sq(disY)) < tempNodeSize/2) {
+//        return true;
+//      } else {
+//        return false;
+//      }
+//    }
+//  }
 
-      if (sqrt(sq(disX) + sq(disY)) < tempNodeSize/2) {
-        isInCurrent=true;
-        //println("The jelly IS in the current");
-      } else {
-        isInCurrent=false;
-      }
-    }
-  }
-
-  void currentIsOnScreen() {
-    boolean isOnScreen;
-    isOnScreen =false;
-    if (nodes.get(1).origin.x > width && nodes.get(nodes.size()-1).origin.x > width) {
-      isOnScreen=false;
-      //println("Current IS NOT on screen");
-    } else if (nodes.get(1).origin.x < 0 && nodes.get(nodes.size()-1).origin.x < 0) {
-      isOnScreen=false;
-      //println("Current IS NOT on screen");
+  boolean isOnScreen() {
+    if (nodes.get(0).origin.x > width && nodes.get(nodes.size()-1).origin.x > width) {
+      return false;
+    } else if (nodes.get(0).origin.x < 0 && nodes.get(nodes.size()-1).origin.x < 0) {
+      return false;
     } else {
-      isOnScreen=true;
+      return true;
     }
   }
 
@@ -137,7 +133,6 @@ class Current {
     for (int i = 1; i <nodes.size ()-1; i++) {
       if (nodes.get(i).nodeSize > maxNode.nodeSize)
       {
-
         // max this current max
         maxNode = nodes.get(i);
       }
