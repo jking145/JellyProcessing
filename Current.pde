@@ -5,8 +5,9 @@ class Current {
   //PVector which store the position of the current
   PVector currentPos;
 
-  float currentWidth;
-  float currentHeight;
+  //To be used to store the calculated width and height of the current
+  //float currentWidth;
+  //float currentHeight;
 
   //ArrayList storing each nodes
   ArrayList<Node> nodes = new ArrayList<Node>();
@@ -14,11 +15,15 @@ class Current {
   //Variable which will keep track the size of the current
   float totalSize;
 
+  //Stores informations about the current
+  //Stores if an object is in the current
   boolean isInCurrent=false;
+  //Stores if the current is on screen
   boolean isOnScreen=false;
-  
+
   //Current constructor
   Current() {
+    //To be used to randomize the current
     //currentPos = currentPos_;
     //currentWidth = currentWidth_;
     //currentHeight = currentHeight_;
@@ -34,19 +39,17 @@ class Current {
         //Add the size of the node to the size counter of the current
         totalSize += tempSize;
       }
+
       //Add other nodes after the first one
       else {
         //Store the size of the node to keep track of the current size
-        float tempSize = random(100);
-        //Add nodes after the first one, must be random but without overlapping.
-        //nodes.add(new Node(new PVector((nodes.get(nodes.size()-1).origin.x)-(nodes.get(nodes.size()-1).getNodeSize()/2+(tempSize/2)), (height/2)), tempSize));
-
-        //p1
+        float tempSize = random(100); 
+        //Stores the position on X of the previous node
         float nA = nodes.get(nodes.size()-1).origin.x-nodes.get(nodes.size()-1).getNodeSize()/2;
+        //Add nodes after the first one, will be random but without overlapping.
         nodes.add(new Node(new PVector(nA-(tempSize/2), (height/2)), tempSize));
         //Add the size of the node to the size counter of the current
         totalSize += tempSize;
-        // println(nodes.size());
       }
     }
   }
@@ -65,8 +68,7 @@ class Current {
     }
   }
 
-  //sabine add
-  //make the water current actually move
+  //Applies the force on each nodes of the current
   void applyForces() {
     PVector waterPush = new PVector(.04, 0.0);
     for (int i = 0; i < nodes.size (); i++) {
@@ -74,7 +76,7 @@ class Current {
     }
   }
 
-  //Let us know if the jellyfish is in the current or not.
+  //Let us know if the jellyfish is in the current
   boolean isInCurrent() {
     //Goes through all the nodes
     for (int i=0; i < nodes.size (); i++) {
@@ -97,28 +99,34 @@ class Current {
     return false;
   }
 
+  //Let us know if the current is on screen
   boolean isOnScreen() {
+    //Check if the first node and last node are out of screen on the right side
     if (nodes.get(0).origin.x > width && nodes.get(nodes.size()-1).origin.x > width) {
       return false;
-    } else if (nodes.get(0).origin.x < 0 && nodes.get(nodes.size()-1).origin.x < 0) {
+    } 
+    //Check if the first node and last node are out of screen on the left side
+    else if (nodes.get(0).origin.x < 0 && nodes.get(nodes.size()-1).origin.x < 0) {
       return false;
     } else {
       return true;
     }
   }
 
-
-  Node getLargestNodeInCurrent()
-  {
+  //Function getting the largest node
+  Node getLargestNodeInCurrent() {
+    //Stores the size of the first node
     Node maxNode = nodes.get(0);
+    //Goes through the array list
     for (int i = 1; i <nodes.size ()-1; i++) {
-      if (nodes.get(i).nodeSize > maxNode.nodeSize)
-      {
-        // max this current max
+      //Check if the next node is bigger than the current biggest one
+      if (nodes.get(i).nodeSize > maxNode.nodeSize) {
+        //Current parsed node become the biggest
         maxNode = nodes.get(i);
       }
     }
     return maxNode;
   }
+  
 }
 
