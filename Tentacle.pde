@@ -20,7 +20,7 @@ class Tentacle {
   float tRotate;
 
   //Opacity.
-  int   alpha;
+  int alpha;
 
   Tentacle() {
     //Assigning random lengths to the arrays (I think but may be wrong.....)
@@ -31,7 +31,7 @@ class Tentacle {
     }
 
     //Assuring that the tentacles always point down.
-    tRotate = random(HALF_PI, -PI);
+    //tRotate = random(HALF_PI, -PI);
 
     //Scalar to determine length of the tentacles, tLength to add degree of randomness to length.
     float scale = cos(tRotate+HALF_PI)+1.8;
@@ -48,12 +48,12 @@ class Tentacle {
 
     //Follow the mouse.
     translate(jelly.origin.x, jelly.origin.y);
-    rotate(tRotate);
+    //rotate(tRotate);
 
     //While loop to keep drawing tentacles to the screen.
     while (x < tLength) {
 
-      float r = map(x, 0, tLength, 30, 1);
+      float r = map(x, 0, tLength, 15, 1);
       float A = map(x, 0, tLength, 0, 1);
 
       //Formula to generate the sine wave in the tentacle movement.
@@ -61,9 +61,10 @@ class Tentacle {
       y = y*A;
 
       //Aesthetic details.
-      noStroke();
-      fill(219, 177, 255, alpha);
-
+      strokeWeight(1);
+      stroke(219, 177, 255, alpha);
+      noFill();
+      
       //Ellipses that make up the tentacles.
       ellipse(x, y, r, r);
 
@@ -72,13 +73,11 @@ class Tentacle {
         float h = r*1.4;
         float g = r*1.9;        
         arc(0, 0, g, g, PI-HALF_PI, TWO_PI-HALF_PI, OPEN);
-        fill(187, 93, 255);
-        arc(0, 0, h, h, PI-HALF_PI, TWO_PI-HALF_PI, OPEN);
       }
 
       //Determines the size of the ellipses making up the tentacles. 
-      if (r>15)
-        tSize = r/10;
+      if (r>10)
+        tSize = r/3;
       x += tSize;
     }
     popMatrix();
