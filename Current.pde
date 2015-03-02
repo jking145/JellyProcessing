@@ -74,21 +74,28 @@ class Current {
     }
   }
 
-//  boolean isInCurrent() {
-//    for (int i=0; i < nodes.size (); i++) {
-//      float tempNodeX = nodes.get(i).origin.x;
-//      float tempNodeY = nodes.get(i).origin.y;
-//      float tempNodeSize = nodes.get(i).getNodeSize();
-//      //rollover processing.org
-//      float disX = tempNodeX - jelly.origin.x;
-//      float disY = tempNodeY - jelly.origin.y;
-//      if (sqrt(sq(disX) + sq(disY)) < tempNodeSize/2) {
-//        return true;
-//      } else {
-//        return false;
-//      }
-//    }
-//  }
+  //Let us know if the jellyfish is in the current or not.
+  boolean isInCurrent() {
+    //Goes through all the nodes
+    for (int i=0; i < nodes.size (); i++) {
+      //Stores the node position
+      float tempNodeX = nodes.get(i).origin.x;
+      float tempNodeY = nodes.get(i).origin.y;
+      //Stores the node size
+      float tempNodeSize = nodes.get(i).getNodeSize();
+      //rollover processing.org
+      //Distance between the node and the jelly.
+      float disX = tempNodeX - jelly.origin.x;
+      float disY = tempNodeY - jelly.origin.y;
+      //Node area formula
+      if (sqrt(sq(disX) + sq(disY)) < tempNodeSize/2) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+    return false;
+  }
 
   boolean isOnScreen() {
     if (nodes.get(0).origin.x > width && nodes.get(nodes.size()-1).origin.x > width) {
@@ -100,32 +107,6 @@ class Current {
     }
   }
 
-  //sabine add
-  //Update the position of each nodes
-  void checkBounds() {
-    Node removedN =null;
-
-    for (int i = nodes.size ()-1; i >0; i--) {
-
-      if (nodes.get(i).origin.x>width)
-      {
-
-        // set the new origin to the last nodes position... -> so remove this one from the list and add on to the end..
-        removedN = nodes.remove(i);
-      }
-    }
-
-    if (removedN!=null)
-    {
-      // println(removedN.nodeSize);
-      //  float tempSize = random(100);
-      //Add nodes after the first one, must be random but without overlapping.
-      float nA = nodes.get(nodes.size()-1).origin.x- nodes.get(nodes.size()-1).getNodeSize()/2;
-      nodes.add(new Node(new PVector(nA-(removedN.nodeSize/2), (height/2)), removedN.nodeSize));
-      nodes.get(nodes.size()-1).velocity= removedN.velocity.get();
-      nodes.get(nodes.size()-1).fillColor= removedN.fillColor;
-    }
-  }
 
   Node getLargestNodeInCurrent()
   {
