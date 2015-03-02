@@ -2,47 +2,47 @@
 //Those are the points of reference making a current
 
 class Node {
-  //PVector which store the location of the node
-
+  //PVector which store the location values of a node
   PVector origin;
-  //PVector which store the acceleration of the node
-  //Might be applied on the full array (current) instead
+  //PVector which store the acceleration values of a node
   PVector acceleration;
   //PVector which store the attraction values of a node
   PVector attraction;
-
+  //PVector which store the velocity values of a node
   PVector velocity;
 
-  //Variable which store the size of a Node
+  //Variables which store different parameters related to a node
   float nodeSize;
   float mass;
   float gravity;
-  color fillColor =255;
-
-
+  color fillColor = 255;
 
   //Constructor
   Node(PVector origin_, float nodeSize_) {
     origin = origin_.get();
-
     nodeSize = nodeSize_;
-    //mass = 20;
-    //**sabine for now
+    //For now, mass and gravity are set to 1 for beta-testing
     mass=1;
     gravity = 1;
-    // acceleration = new PVector(3, 0);
-    // SABINE ADD::
+    //Makes new velocity vector
     velocity = new PVector(0, 0);
+    //Makes new acceleration vector
     acceleration = new PVector();
   }
 
-
+  //PVector that attract the jelly to a node
   PVector attract(JellyFish jelly) {
+    //Makes a new force resulting from the substraction between the node and the jelly
     PVector force = PVector.sub(origin, jelly.origin);
+    //Stores the magnitude of the force as a distance
     float distance = force.mag();
+    //Constrain the distance
     distance = constrain(distance, 5.0, 25.0);
+    //Normalize the force
     force.normalize();
+    //Strength of attraction calculation
     float strength = (gravity * ((nodeSize/2)*mass) * jelly.mass) / (distance * distance);
+    //Multiply the nomarlized force by the strength
     force.mult(strength);
     return force;
   }
@@ -56,8 +56,8 @@ class Node {
     ellipse(origin.x, origin.y, nodeSize, nodeSize);
   }
 
-  void applyForce(PVector forceIn)
-  {
+  //Apply the inputed force from current (waterPush)
+  void applyForce(PVector forceIn) {
     PVector f = forceIn.get();
     f.div(mass);
     acceleration.add(f);
@@ -65,14 +65,13 @@ class Node {
 
   //Update function of a node
   void update() {
-    //Move the node with acceleration vector
-    // origin.add(acceleration);
-
-    //SABINE ADD::
+    //Applies the acceleration to the velocity
     velocity.add(acceleration);
-    // want to limit the velocity?
+    //Limit the velocity
     velocity.limit(5);
+    //Add the velocity to the origin
     origin.add(velocity);
+    //Reset the acceleration
     acceleration.mult(0);
   }
 
