@@ -75,17 +75,9 @@ class Current {
       nodes.get(i).applyForce(waterPush);
     }
   }
-  
-  //Track if the jellfish is touching a node or not.
-  boolean collidesWith(JellyFish jelly, float tempNodeX, float tempNodeY, float radius) {
-    float distance = dist(tempNodeX,tempNodeY, jelly.origin.x, jelly.origin.y);
-    float sumRadius = radius + jelly.jellySize/2;
-    if (distance < sumRadius) {
-      return true;
-    }
-    return false;
-  }
-  
+
+
+
   //Function that returns the node which is touched by the jelly
   Node isInCurrent(JellyFish jelly) {
     //Goes through all the nodes
@@ -96,16 +88,26 @@ class Current {
       //Stores the node size
       float tempNodeSize = nodes.get(i).getNodeSize();
       //Check if the boolean returned true
-      if(collidesWith(jelly,tempNodeX,tempNodeY,tempNodeSize/2)) {
+      if (collidesWith(jelly, tempNodeX, tempNodeY, tempNodeSize/2)) {
         return nodes.get(i);
       }
     }
     return null;
   }
-  
 
+  //Track if the jellfish is touching a node or not.
+  boolean collidesWith(JellyFish jelly, float tempNodeX, float tempNodeY, float radius) {
+    //Distance between a node and the jelly
+    float distance = dist(tempNodeX, tempNodeY, jelly.origin.x, jelly.origin.y);
+    //Adding the radius of a node to the radius of the jelly
+    float sumRadius = radius + jelly.jellySize/2;
+    //If the distance is smaller than the sum, they are colliding
+    if (distance < sumRadius) {
+      return true;
+    }
+    return false;
+  }
   
-
   //Let us know if the current is on screen
   boolean isOnScreen() {
     //Check if the first node and last node are out of screen on the right side

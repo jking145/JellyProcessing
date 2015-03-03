@@ -1,6 +1,3 @@
-// The Nature of Code
-// Daniel Shiffman
-// http://natureofcode.com
 
 class JellyFish {
 
@@ -18,7 +15,6 @@ class JellyFish {
 
   //Number of tentacles.
   int count = 7;
-
 
   JellyFish() {
     // Start in the center
