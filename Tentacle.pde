@@ -3,7 +3,7 @@
 
 class Tentacle {
   //Arraylist to hold the tentacle arrays.
-  ArrayList<Tentacle> tentacle;
+  //ArrayList<Tentacle> tentacle;
 
   //Arrays to control tentacle generation. 
   float[] dist = new float[3];
@@ -60,7 +60,12 @@ class Tentacle {
       float ampMap = map(tentacleOriginX, 0, tLength, 0, 1);
 
       //Distance is multiplied by the origin point of the tentacle. Speed is added. Multiplied by the amplitude to increase the height of the wave.
-      tentacleOriginY = sin(dist[0]*tentacleOriginX+speed)*amp[0] + sin(dist[1]*tentacleOriginX+speed)*amp[1] + sin(dist[2]*tentacleOriginX+speed)*amp[2];
+      //tentacleOriginY = sin(dist[0]*tentacleOriginX+speed)*amp[0] + sin(dist[1]*tentacleOriginX+speed)*amp[1] + sin(dist[2]*tentacleOriginX+speed)*amp[2];
+      
+      tentacleOriginY = 0;
+      for (int i=0; i<dist.length; i++) {
+        tentacleOriginY+=sin(dist[i]*tentacleOriginX+speed)*amp[i];
+      }
       
       //Once the sine wave is generated the mapped amplitude value is applied.
       tentacleOriginY = tentacleOriginY*ampMap;

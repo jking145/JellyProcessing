@@ -34,7 +34,7 @@ class Current {
       if (nodes.size()==0) {
         //Store the size of the node to keep track of the current size
         float tempSize = random(100);
-        float nodePosOffset = random(-100,100);
+        float nodePosOffset = random(-tempSize, tempSize);
         //Add a node object to the ArrayList, must randomize the position of each nodes
         nodes.add(new Node(new PVector(0, (height/2)+nodePosOffset), tempSize));
         //Add the size of the node to the size counter of the current
@@ -45,7 +45,7 @@ class Current {
       else {
         //Store the size of the node to keep track of the current size
         float tempSize = random(100);
-        float nodePosOffset = random(-100,100);
+        float nodePosOffset = random(-tempSize, tempSize);
         //Stores the position on X of the previous node
         float nA = nodes.get(nodes.size()-1).origin.x-nodes.get(nodes.size()-1).getNodeSize()/2;
         //Add nodes after the first one, will be random but without overlapping.
@@ -78,11 +78,13 @@ class Current {
     }
   }
 
-
-
   //Function that returns the node which is touched by the jelly
   Node isInCurrent(JellyFish jelly) {
     //Goes through all the nodes
+    //reset all nodes - for testing purposes only!
+    for (int i=0; i < nodes.size (); i++) {
+      nodes.get(i).fillColor=color(255);
+    }
     for (int i=0; i < nodes.size (); i++) {
       //Stores the node position
       float tempNodeX = nodes.get(i).origin.x;
@@ -91,6 +93,8 @@ class Current {
       float tempNodeSize = nodes.get(i).getNodeSize();
       //Check if the boolean returned true
       if (collidesWith(jelly, tempNodeX, tempNodeY, tempNodeSize/2)) {
+        //Setting the node color to green when a collision is detected
+        nodes.get(i).fillColor = color(0, 255, 0);
         return nodes.get(i);
       }
     }
@@ -109,7 +113,7 @@ class Current {
     }
     return false;
   }
-  
+
   //Let us know if the current is on screen
   boolean isOnScreen() {
     //Check if the first node and last node are out of screen on the right side

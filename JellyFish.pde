@@ -75,7 +75,7 @@ class JellyFish {
   //Build the tentacles of the jellyfish.
   void buildTentacles() {  
     for (int i=0; i<tentacleAmount; i++) {
-      tentacles.add(new Tentacle() );
+      tentacles.add(new Tentacle());
     }
   }
 
