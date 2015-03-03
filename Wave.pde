@@ -1,9 +1,7 @@
 // The Nature of Code
 // Daniel Shiffman
 // http://natureofcode.com
-
-
-//NB: Have to modify to make it oscillate up and down.
+// Tweaked by Michel Didier
 
 class Wave {
 
