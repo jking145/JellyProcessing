@@ -34,8 +34,9 @@ class Current {
       if (nodes.size()==0) {
         //Store the size of the node to keep track of the current size
         float tempSize = random(100);
+        float nodePosOffset = random(-100,100);
         //Add a node object to the ArrayList, must randomize the position of each nodes
-        nodes.add(new Node(new PVector(0, height/2), tempSize));
+        nodes.add(new Node(new PVector(0, (height/2)+nodePosOffset), tempSize));
         //Add the size of the node to the size counter of the current
         totalSize += tempSize;
       }
@@ -43,11 +44,12 @@ class Current {
       //Add other nodes after the first one
       else {
         //Store the size of the node to keep track of the current size
-        float tempSize = random(100); 
+        float tempSize = random(100);
+        float nodePosOffset = random(-100,100);
         //Stores the position on X of the previous node
         float nA = nodes.get(nodes.size()-1).origin.x-nodes.get(nodes.size()-1).getNodeSize()/2;
         //Add nodes after the first one, will be random but without overlapping.
-        nodes.add(new Node(new PVector(nA-(tempSize/2), (height/2)), tempSize));
+        nodes.add(new Node(new PVector(nA-(tempSize/2), (height/2)+nodePosOffset), tempSize));
         //Add the size of the node to the size counter of the current
         totalSize += tempSize;
       }
