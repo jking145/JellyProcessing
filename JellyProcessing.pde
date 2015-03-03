@@ -18,18 +18,14 @@ JellyFish jelly;
 
 //SETUP
 void setup() {
-  //Make the sketch 1280 by 720
+  //Displays the environment
   size(1280, 720);
-  //Force the frameRate to 60
   frameRate(60);
-  //Background color
   background(2, 15, 80);
 
-  //Create new objects
+  //Instantiate environment related objects
   wave = new Wave(new PVector(0, 100), width, 10, 50);
   current = new Current();
-
-  //Create a new jelly
   jelly = new JellyFish();
 }
 
@@ -38,19 +34,17 @@ void draw() {
   //Refresh the background
   background(2, 15, 80);
 
-  //Wave functions
+  //Functions which are displaying and animating the elements of the environment
   wave.calculate();
   wave.display();
 //  if (current.isOnScreen()) {
 //    wave.update();
 //  }
 
-  //Current functions
   current.display();
   current.applyForces();
   current.update();
   
-  //Jellyfish functions
   jelly.display();
   jelly.update();
   
