@@ -25,9 +25,9 @@ class Tentacle {
   Tentacle() {
     //Assigning random lengths to the arrays (I think but may be wrong.....)
     for (int i=0; i<3; i++) {
-      a[i] = random(0.005, 0.08);
+      a[i] = random(0.005, 0.1);
       b[i] = random(0, HALF_PI);
-      c[i] = random(2, 15);
+      c[i] = random(2, 30);
     }
 
     //Assuring that the tentacles always point down.
@@ -35,7 +35,7 @@ class Tentacle {
 
     //Scalar to determine length of the tentacles, tLength to add degree of randomness to length.
     float scale = cos(tRotate+HALF_PI)+1.8;
-    tLength = height*random(0.1, 0.3)*scale;
+    tLength = width/4*random(0.1, 0.3)*scale;
 
     //Opacity.
     alpha = int(random(40, 60));

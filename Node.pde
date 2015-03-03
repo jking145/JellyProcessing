@@ -22,8 +22,8 @@ class Node {
     origin = origin_.get();
     nodeSize = nodeSize_;
     //For now, mass and gravity are set to 1 for beta-testing
-    mass=1;
-    gravity = 1;
+    mass = 1;
+    gravity = 5;
     //Makes new velocity vector
     velocity = new PVector(0, 0);
     //Makes new acceleration vector

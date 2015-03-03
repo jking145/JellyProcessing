@@ -40,14 +40,16 @@ class Wave {
   }
 
   void display() {
-    // A simple way to draw the wave with an ellipse at each location
+    // A simple way to draw the wave with a line at each location
     for (int x = 0; x < yvalues.length; x++) {
       noStroke();
       fill(255);
-      //rectMode(CENTER);
-      //(origin.y+yvalues[x])+height as the last parameter to draw lines
       rect(origin.x+x*xspacing, origin.y+yvalues[x], 1, 1);
     }
   }
+
+  //void update() {
+  //  origin.y+=random(-10,10);
+  //}
 }
 

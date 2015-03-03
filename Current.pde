@@ -75,9 +75,19 @@ class Current {
       nodes.get(i).applyForce(waterPush);
     }
   }
-
-  //Let us know if the jellyfish is in the current
-  boolean isInCurrent() {
+  
+  //Track if the jellfish is touching a node or not.
+  boolean collidesWith(JellyFish jelly, float tempNodeX, float tempNodeY, float radius) {
+    float distance = dist(tempNodeX,tempNodeY, jelly.origin.x, jelly.origin.y);
+    float sumRadius = radius + jelly.jellySize/2;
+    if (distance < sumRadius) {
+      return true;
+    }
+    return false;
+  }
+  
+  //Function that returns the node which is touched by the jelly
+  Node isInCurrent(JellyFish jelly) {
     //Goes through all the nodes
     for (int i=0; i < nodes.size (); i++) {
       //Stores the node position
@@ -85,19 +95,16 @@ class Current {
       float tempNodeY = nodes.get(i).origin.y;
       //Stores the node size
       float tempNodeSize = nodes.get(i).getNodeSize();
-      //rollover processing.org
-      //Distance between the node and the jelly.
-      float disX = tempNodeX - jelly.origin.x;
-      float disY = tempNodeY - jelly.origin.y;
-      //Node area formula
-      if (sqrt(sq(disX) + sq(disY)) < tempNodeSize/2) {
-        return true;
-      } else {
-        return false;
+      //Check if the boolean returned true
+      if(collidesWith(jelly,tempNodeX,tempNodeY,tempNodeSize/2)) {
+        return nodes.get(i);
       }
     }
-    return false;
+    return null;
   }
+  
+
+  
 
   //Let us know if the current is on screen
   boolean isOnScreen() {
@@ -118,7 +125,7 @@ class Current {
     //Stores the size of the first node
     Node maxNode = nodes.get(0);
     //Goes through the array list
-    for (int i = 1; i <nodes.size ()-1; i++) {
+    for (int i = 1; i < nodes.size ()-1; i++) {
       //Check if the next node is bigger than the current biggest one
       if (nodes.get(i).nodeSize > maxNode.nodeSize) {
         //Current parsed node become the biggest
@@ -127,6 +134,5 @@ class Current {
     }
     return maxNode;
   }
-  
 }
 

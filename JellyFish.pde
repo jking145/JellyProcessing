@@ -11,6 +11,7 @@ class JellyFish {
   // The Mover's maximum speed
   float topspeed;
   float mass;
+  float jellySize=48;
 
   //Arraylist to hold the tentacle arrays.
   ArrayList<Tentacle> tentacles;
@@ -24,12 +25,8 @@ class JellyFish {
     origin = new PVector(width/2, height/2);
     velocity = new PVector(0, 0);
     acceleration = new PVector(0, 0);
-    //acceleration = new PVector(0,0);
     topspeed = 5;
-    //mass = 10;
-    //sabine
-    mass=1;
-
+    mass = 1;
     tentacles = new ArrayList<Tentacle>();
     buildTentacles();
   }
@@ -40,7 +37,7 @@ class JellyFish {
     PVector mouse = new PVector(mx, my);
     PVector strength = PVector.sub(mouse, origin);
     strength.normalize();
-    strength.mult(0.05);
+    strength.mult(0.3);
     return strength;
   }
 
@@ -70,18 +67,6 @@ class JellyFish {
   void applyForce(PVector force) {
     PVector newForce = PVector.div(force, mass);
     acceleration.add(newForce);
-  }
-
-  void checkEdges()
-  {
-    if (origin.x>width||origin.x<0)
-    {
-      velocity.x*=-1;
-    }
-    if (origin.y>height||origin.y<0)
-    {
-      velocity.y*=-1;
-    }
   }
 }
 
