@@ -11,53 +11,53 @@
  * Keep this new baby alive, it will grow learning from your actions and maybe find another jellyfish and create some more eggs to fertilize!
  */
 
-//Variables which store the objects instances
+//Variables store instances.
 Wave wave;
 Current current;
 JellyFish jelly;
 
-//SETUP
+//Main setup.
 void setup() {
-  //Displays the environment
   size(1280, 720);
   frameRate(60);
   background(2, 15, 80);
 
-  //Instantiate environment related objects
+  //Instantiates environment.
   wave = new Wave(new PVector(0, 100), width, 10, 50);
   current = new Current();
   jelly = new JellyFish();
 }
 
-//DRAW
+//Main draw.
 void draw() {
-  //Refresh the background
+  //Refreshes the background.
   background(2, 15, 80);
 
-  //Functions which are displaying and animating the elements of the environment
+  //  if (current.isOnScreen()) {
+  //    wave.update();
+  //  }
+
   wave.calculate();
   wave.display();
-//  if (current.isOnScreen()) {
-//    wave.update();
-//  }
 
   current.display();
   current.applyForces();
   current.update();
-  
+
   jelly.display();
   jelly.update();
-  
-  //Stores the node that the jellyfish is touching
+
+  //Stores the node that the jellyfish is touching.
   Node collidingNode = current.isInCurrent(jelly);
-  //Applies the forces on the jelly only if the current is on screen
-  //And if the jelly is touching a node
+
+  //Applies forces on the jelly only if the current is on screen and in contact with jellyfish.
   if (collidingNode!=null && current.isOnScreen()) {
-    //Applies the attraction force between the jelly and the colliding node
+
+    //Applies the attraction force between the jelly and the colliding node.
     PVector attractForceWithCollidingNode = collidingNode.attract(jelly);
     jelly.applyForce(attractForceWithCollidingNode);
   } else {
-    //Applies the mouse tracking as a force (for now)
+    //Applies the mouse tracking as a force.
     PVector mForce = jelly.getMouseAttractionForce(mouseX, mouseY);
     jelly.applyForce(mForce);
   }

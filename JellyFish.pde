@@ -1,13 +1,13 @@
-//Jellyfish object
-//A jellyfish object that is built from multiple tentacles and a head
+//Jellyfish Class
+//Jellyfish constructed from multiple tentacles and a head.
 
 class JellyFish {
-
-  // The jellyfish tracks orign, velocity, and acceleration 
+  //The jellyfish tracks orign, velocity, and acceleration.
   PVector origin;
   PVector velocity;
   PVector acceleration;
-  // The jellyfish's maximum speed, mass, size
+
+  //The jellyfish's maximum speed, mass, size.
   float topspeed;
   float mass;
   float jellySize=48;
@@ -18,61 +18,71 @@ class JellyFish {
   //Number of tentacles.
   int tentacleAmount = 7;
 
-  //Constructor
+  //Constructor.
   JellyFish() {
-    //Default start of the jelly, to be changed
+    //Default start of the jellyfish, to be changed.
     origin = new PVector(width/2, height/2);
-    //PVector which store the velocity values of a node
+    //PVectors store the velocity  and acceleration values.
     velocity = new PVector(0, 0);
-     //PVector which store the acceleration values of a node
     acceleration = new PVector(0, 0);
-    //Topspeed of the jelly
+
+    //Topspeed of the jellyfish.
     topspeed = 5;
-    //Mass of the jelly
+
+    //Mass of the jellyfish.
     mass = 1;
-    //Stores the tentacles of the jelly
+
+    //Stores the tentacles of the jellyfish.
     tentacles = new ArrayList<Tentacle>();
-    //Function which build the tentacles
+
+    //Builds tentacles.
     buildTentacles();
   }
-  
-  //PVector that attract the jelly to the mouse
+
+  //Attracts the jellyfish to the mouse.
   PVector getMouseAttractionForce(float mx, float my)
   {
-    //Compute a vector that points from orign to mouse
+    //Computes a vector that points from orign to mouse.
     PVector mouse = new PVector(mx, my);
-    //Compute the strength of the force
+
+    //Computes the strength of the force.
     PVector strength = PVector.sub(mouse, origin);
-    //Normalize the strength vector
+
+    //Normalizes the strength vector.
     strength.normalize();
-    //Scaling the strength vector
+
+    //Scales the strength vector.
     strength.mult(0.3);
     return strength;
   }
 
-  //Draw the jelly to the screen
+  //Draws the jellyfish to the screen.
   void display() {
-    //Draw each tentacles
+    //Draws each tentacle.
     for (Tentacle jelly : tentacles) {
       jelly.drawTentacle();
       jelly.update();
     }
-    //Draw the head of the jelly
+    //Draws jellyfish head.
     jelly.buildHead();
   }
 
+  //Update jellyfish.
   void update() {
-    // Velocity changes according to acceleration
+    //Velocity changes according to acceleration.
     velocity.add(acceleration);
-    // Limit the velocity by topspeed
+
+    //Limits the velocity by topspeed.
     velocity.limit(topspeed);
-    // Location changes by velocity
+
+    //Location changes by velocity.
     origin.add(velocity);
-    //Reset the acceleration
+
+    //Resets the acceleration.
     acceleration.mult(0);
   }
 
-  //Build the tentacles of the jellyfish.
+  //Builds the tentacles of the jellyfish.
   void buildTentacles() {  
     for (int i=0; i<tentacleAmount; i++) {
       tentacles.add(new Tentacle());
@@ -84,11 +94,21 @@ class JellyFish {
     fill(219, 177, 255);    
     arc(origin.x, origin.y, jellySize/2, jellySize/2, PI-HALF_PI, TWO_PI-HALF_PI, OPEN);
   }
-  
-  //Apply the attraction force from the current and/or the mouse
+
+  //Applies the attraction force from the current and/or the mouse.
   void applyForce(PVector force) {
     PVector newForce = PVector.div(force, mass);
     acceleration.add(newForce);
+  }
+
+  //Get origin.
+  PVector getOrigin() {
+    return origin.get();
+  }
+
+  //Get jellyfish size.
+  float getJellySize() {
+    return jellySize;
   }
 }
 
