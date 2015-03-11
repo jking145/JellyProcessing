@@ -1,12 +1,13 @@
 //Node Class.
 //Nodes are points of reference making the current.
 
-class Node {
-  //The Node tracks orign, acceleration, vattraction, and velocity.
-  PVector origin;
+class ParticleNode extends Particle {
+  //The Node tracks orign, acceleration, attraction, and velocity.
+  //Call the parent constructor.
+  super( location_, velocity_, acceleration_, attraction_, mass_);
+  
   PVector acceleration;
   PVector attraction;
-  PVector velocity;
 
   //Variables which store different parameters related to a node.
   float nodeSize;

@@ -48,7 +48,7 @@ class Tentacle {
     pushMatrix();
 
     //Position.
-    translate(jelly.origin.x, jelly.origin.y);
+    translate(jelly.location.x, jelly.location.y);
 
 
     while (tentacleOriginX < tLength) {

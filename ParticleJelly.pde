@@ -1,11 +1,10 @@
 //Jellyfish Class
 //Jellyfish constructed from multiple tentacles and a head.
 
-class JellyFish {
+class ParticleJelly extends Particle {
   //The jellyfish tracks orign, velocity, and acceleration.
-  PVector origin;
-  PVector velocity;
-  PVector acceleration;
+  //Call the parent constructor.
+  super( location_, velocity_, mass_);
 
   //The jellyfish's maximum speed, mass, size.
   float topspeed;
@@ -21,7 +20,7 @@ class JellyFish {
   //Constructor.
   JellyFish() {
     //Default start of the jellyfish, to be changed.
-    origin = new PVector(width/2, height/2);
+    location = new PVector(width/2, height/2);
     //PVectors store the velocity  and acceleration values.
     velocity = new PVector(0, 0);
     acceleration = new PVector(0, 0);
@@ -46,7 +45,7 @@ class JellyFish {
     PVector mouse = new PVector(mx, my);
 
     //Computes the strength of the force.
-    PVector strength = PVector.sub(mouse, origin);
+    PVector strength = PVector.sub(mouse, location);
 
     //Normalizes the strength vector.
     strength.normalize();
@@ -76,7 +75,7 @@ class JellyFish {
     velocity.limit(topspeed);
 
     //Location changes by velocity.
-    origin.add(velocity);
+    location.add(velocity);
 
     //Resets the acceleration.
     acceleration.mult(0);
@@ -92,7 +91,7 @@ class JellyFish {
   //Builds the head of the jellyfish.
   void buildHead() {
     fill(219, 177, 255);    
-    arc(origin.x, origin.y, jellySize/2, jellySize/2, PI-HALF_PI, TWO_PI-HALF_PI, OPEN);
+    arc(location.x, location.y, jellySize/2, jellySize/2, PI-HALF_PI, TWO_PI-HALF_PI, OPEN);
   }
 
   //Applies the attraction force from the current and/or the mouse.
@@ -102,8 +101,8 @@ class JellyFish {
   }
 
   //Get origin.
-  PVector getOrigin() {
-    return origin.get();
+  PVector getLocation() {
+    return location.get();
   }
 
   //Get jellyfish size.

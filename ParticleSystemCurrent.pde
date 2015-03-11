@@ -1,7 +1,7 @@
 //Current Class.
 //Made from multiple nodes.
 
-class Current {
+class ParticleSystemCurrent extends ParticleSystem {
   //Position of current.
   PVector currentPos;
 
@@ -51,7 +51,7 @@ class Current {
         float nodePosOffset = random(-tempSize, tempSize);
 
         //Stores the x position of the previous node.
-        float nA = nodes.get(nodes.size()-1).getOrigin().x-nodes.get(nodes.size()-1).getNodeSize()/2;
+        float nA = nodes.get(nodes.size()-1).getLocation().x-nodes.get(nodes.size()-1).getNodeSize()/2;
 
         //Adds nodes after the first one. Will be random but without overlapping.
         nodes.add(new Node(new PVector(nA-(tempSize/2), (height/2)+nodePosOffset), tempSize));
@@ -94,8 +94,8 @@ class Current {
     }
     for (int i=0; i < nodes.size (); i++) {
       //Stores node position.
-      float tempNodeX = nodes.get(i).getOrigin().x;
-      float tempNodeY = nodes.get(i).getOrigin().y;
+      float tempNodeX = nodes.get(i).getLocation().x;
+      float tempNodeY = nodes.get(i).getLocation().y;
 
       //Stores node size.
       float tempNodeSize = nodes.get(i).getNodeSize();
@@ -114,7 +114,7 @@ class Current {
   //Tracks if the jellfish is touching a node or not.
   boolean collidesWith(JellyFish jelly, float tempNodeX, float tempNodeY, float radius) {
     //Distance between a node and the jellyfish.
-    float distance = dist(tempNodeX, tempNodeY, jelly.getOrigin().x, jelly.getOrigin().y);
+    float distance = dist(tempNodeX, tempNodeY, jelly.getLocation().x, jelly.getLocation().y);
 
     //Adds the radius of a node to the radius of the jellyfish.
     float sumRadius = radius + jelly.getJellySize()/2;
@@ -129,12 +129,12 @@ class Current {
   //Tracks if current is on screen.
   boolean isOnScreen() {
     //Check if the first node and last node are out of screen on the right side.
-    if (nodes.get(0).getOrigin().x > width && nodes.get(nodes.size()-1).getOrigin().x > width) {
+    if (nodes.get(0).getLocation().x > width && nodes.get(nodes.size()-1).getLocation().x > width) {
       return false;
     } 
 
     //Check if the first node and last node are out of screen on the left side.
-    else if (nodes.get(0).getOrigin().x < 0 && nodes.get(nodes.size()-1).getOrigin().x < 0) {
+    else if (nodes.get(0).getLocation().x < 0 && nodes.get(nodes.size()-1).getLocation().x < 0) {
       return false;
     } else {
       return true;
