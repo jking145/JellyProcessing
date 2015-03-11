@@ -2,18 +2,16 @@
 //Made from multiple nodes.
 
 class ParticleSystemCurrent extends ParticleSystem {
-  //Position of current.
-  PVector currentPos;
 
   //Stores width and height.
-  //float currentWidth;
+  
   //float currentHeight;
 
   //ArrayList stores each node.
   ArrayList<Node> nodes = new ArrayList<Node>();
 
   //Current size.
-  float totalSize;
+  float currentWidth;
 
   //Tracks if an object is in the current.
   boolean isInCurrent=false;
@@ -22,14 +20,12 @@ class ParticleSystemCurrent extends ParticleSystem {
   boolean isOnScreen=false;
 
   //Constructor.
-  Current() {
-    //Could be used to randomize the current.
-    //currentPos = currentPos_;
-    //currentWidth = currentWidth_;
+  ParticleSystemCurrent(PVector origin_) {
+    super(origin_);
     //currentHeight = currentHeight_;
 
     //Adds nodes to the array list as long as the current is not the size of the width.
-    while (totalSize < width+200) {
+    while (currentWidth < width+200) {
       //Start with the first node as a reference.
       if (nodes.size()==0) {
 
@@ -41,7 +37,7 @@ class ParticleSystemCurrent extends ParticleSystem {
         nodes.add(new Node(new PVector(0, (height/2)+nodePosOffset), tempSize));
 
         //Adds the size of the node to the size counter of the current.
-        totalSize += tempSize;
+        currentWidth += tempSize;
       }
 
       //Add other nodes to current.
@@ -57,7 +53,7 @@ class ParticleSystemCurrent extends ParticleSystem {
         nodes.add(new Node(new PVector(nA-(tempSize/2), (height/2)+nodePosOffset), tempSize));
 
         //Adds the size of the node to the size counter of the current.
-        totalSize += tempSize;
+        currentWidth += tempSize;
       }
     }
   }
@@ -85,7 +81,7 @@ class ParticleSystemCurrent extends ParticleSystem {
   }
 
   //Returns the node in contact with the jelly.
-  Node isInCurrent(JellyFish jelly) {
+  ParticleNode isInCurrent(ParticleJelly jelly) {
 
     //Iterates through all the nodes.
     //Resets all nodes - for testing purposes only.

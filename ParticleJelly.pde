@@ -2,13 +2,8 @@
 //Jellyfish constructed from multiple tentacles and a head.
 
 class ParticleJelly extends Particle {
-  //The jellyfish tracks orign, velocity, and acceleration.
-  //Call the parent constructor.
-  super( location_, velocity_, mass_);
-
   //The jellyfish's maximum speed, mass, size.
   float topspeed;
-  float mass;
   float jellySize=48;
 
   //Arraylist to hold the tentacle arrays.
@@ -18,12 +13,15 @@ class ParticleJelly extends Particle {
   int tentacleAmount = 7;
 
   //Constructor.
-  JellyFish() {
+  ParticleJelly(PVector location_, PVector velocity_, PVector acceleration_, float mass_) {
+    //Call the parent constructor.
+    super(location_, velocity_, acceleration_, mass_);
+    
     //Default start of the jellyfish, to be changed.
-    location = new PVector(width/2, height/2);
+    //location = new PVector(width/2, height/2);
     //PVectors store the velocity  and acceleration values.
-    velocity = new PVector(0, 0);
-    acceleration = new PVector(0, 0);
+    //velocity = new PVector(0, 0);
+    //acceleration = new PVector(0, 0);
 
     //Topspeed of the jellyfish.
     topspeed = 5;
@@ -37,7 +35,7 @@ class ParticleJelly extends Particle {
     //Builds tentacles.
     buildTentacles();
   }
-
+  
   //Attracts the jellyfish to the mouse.
   PVector getMouseAttractionForce(float mx, float my)
   {

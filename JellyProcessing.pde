@@ -13,8 +13,8 @@
 
 //Variables store instances.
 Wave wave;
-Current current;
-JellyFish jelly;
+ParticleSystemCurrent current;
+ParticleJelly jelly;
 
 //Main setup.
 void setup() {
@@ -24,8 +24,8 @@ void setup() {
 
   //Instantiates environment.
   wave = new Wave(new PVector(0, 100), width, 10, 50);
-  current = new Current();
-  jelly = new JellyFish();
+  current = new ParticleSystemCurrent(new PVector(-width, height/2));
+  jelly = new ParticleJelly(new PVector(width/2, height/2), new PVector(0, 0), new PVector(0, 0), 48);
 }
 
 //Main draw.
@@ -48,7 +48,7 @@ void draw() {
   jelly.update();
 
   //Stores the node that the jellyfish is touching.
-  Node collidingNode = current.isInCurrent(jelly);
+  ParticleNode collidingNode = current.isInCurrent(jelly);
 
   //Applies forces on the jelly only if the current is on screen and in contact with jellyfish.
   if (collidingNode!=null && current.isOnScreen()) {

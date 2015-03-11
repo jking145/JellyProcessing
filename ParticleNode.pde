@@ -3,10 +3,6 @@
 
 class ParticleNode extends Particle {
   //The Node tracks orign, acceleration, attraction, and velocity.
-  //Call the parent constructor.
-  super( location_, velocity_, acceleration_, attraction_, mass_);
-  
-  PVector acceleration;
   PVector attraction;
 
   //Variables which store different parameters related to a node.
@@ -16,8 +12,11 @@ class ParticleNode extends Particle {
   color fillColor = 255;
 
   //Constructor.
-  Node(PVector origin_, float nodeSize_) {
-    origin = origin_.get();
+  Node(PVector location_, PVector velocity_, PVector acceleration_, float nodeSize_) {
+    //Call the parent constructor.
+    super( location_, velocity_, acceleration_, mass_);
+
+    location = location_.get();
     nodeSize = nodeSize_;
 
     //For now, mass is set to 1 for beta-testing.
@@ -32,9 +31,9 @@ class ParticleNode extends Particle {
   }
 
   //PVector that attracts the jelly to a node.
-  PVector attract(JellyFish jelly) {
+  PVector attract(ParticleJelly jelly) {
     //Makes a new force resulting from the substraction between the node and the jelly.
-    PVector force = PVector.sub(origin, jelly.origin);
+    PVector force = PVector.sub(location, jelly.location);
 
     //Stores the magnitude of the force as a distance.
     float distance = force.mag();
@@ -59,7 +58,7 @@ class ParticleNode extends Particle {
   void display() {
     ellipseMode(CENTER);
     fill(fillColor);
-    ellipse(origin.x, origin.y, nodeSize, nodeSize);
+    ellipse(location.x, location.y, nodeSize, nodeSize);
   }
 
   //Applys the inputed force from current (waterPush).
@@ -91,8 +90,8 @@ class ParticleNode extends Particle {
   }
 
   //Get origin.
-  PVector getOrigin() {
-    return origin.get();
+  PVector getLocation() {
+    return location.get();
   }
 }
 
