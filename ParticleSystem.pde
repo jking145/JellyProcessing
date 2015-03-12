@@ -4,17 +4,21 @@ class ParticleSystem {
   ArrayList<Particle> particles;
 
   //Origin point for where particles are birthed.
-  PVector origin;
+  PVector location;
+  
+  //TESTING TO SEE IF THIS FIXES THE CODE
+  PVector velocity;
 
   //Current iteration.
   int iteration;
 
-  ParticleSystem(PVector origin_) {  
+  ParticleSystem(PVector location_, PVector velocity_) {  
     //Initialize the arraylist.
     particles = new ArrayList<Particle>();
 
     //Store the origin point.
-    origin = origin_.get();
+    location = location_.get();
+    velocity = velocity_.get();
   }
 
   //Method to update and apply forces to the particles. 
@@ -43,11 +47,11 @@ class ParticleSystem {
   Particle createParticle() {
     float x = random(0, 1);
     if ( x < 0.33) {
-      return new ParticlePlankton(origin, PVector.random2D(), 1);
+      return new ParticlePlankton(location, velocity, PVector.random2D(), 1);
     } else if (x < 0.66) { 
-      return new ParticleAirBubbles(origin, PVector.random2D(), 1);
+      return new ParticleAirBubbles(location, velocity, PVector.random2D(), 1);
     } else {
-      return new ParticleOilSpill(origin, PVector.random2D(), 1);
+      return new ParticleOil(location, velocity, PVector.random2D(), 1);
     }
   }
 

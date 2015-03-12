@@ -24,8 +24,8 @@ void setup() {
 
   //Instantiates environment.
   wave = new Wave(new PVector(0, 100), width, 10, 50);
-  current = new ParticleSystemCurrent(new PVector(-width, height/2));
-  jelly = new ParticleJelly(new PVector(width/2, height/2), new PVector(0, 0), new PVector(0, 0), 48);
+ current = new ParticleSystemCurrent(new PVector(-width, height/2), new PVector (0,0));
+ jelly = new ParticleJelly(new PVector(width/2, height/2), new PVector(0, 0), new PVector(0, 0), 48);
 }
 
 //Main draw.
@@ -33,19 +33,19 @@ void draw() {
   //Refreshes the background.
   background(2, 15, 80);
 
-  //  if (current.isOnScreen()) {
-  //    wave.update();
-  //  }
+//    if (current.isOnScreen()) {
+//      wave.update();
+//   }
 
   wave.calculate();
   wave.display();
 
-  current.display();
-  current.applyForces();
-  current.update();
+ current.display();
+ current.applyForces();
+ current.update();
 
-  jelly.display();
-  jelly.update();
+ jelly.display();
+ jelly.update();
 
   //Stores the node that the jellyfish is touching.
   ParticleNode collidingNode = current.isInCurrent(jelly);

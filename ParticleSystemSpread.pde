@@ -2,8 +2,8 @@
 class ParticleSystemSpread extends ParticleSystem {
 
   //Get the particle origin.
-  ParticleSystemSpread(PVector origin_) {
-    super(origin_);
+  ParticleSystemSpread(PVector location_, PVector velocity_) {
+    super(location_, velocity_);
   }
 
   //Apply gravity and friction.
@@ -36,7 +36,7 @@ class ParticleSystemSpread extends ParticleSystem {
 
   //Draw particles to the screen.
   Particle createParticle() {
-    return new ParticleOilSpill(origin, PVector.random2D(), 1);
+    return new ParticleOil(location, PVector.random2D(), new PVector(0,0), 1);
   }
 }
 

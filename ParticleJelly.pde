@@ -15,7 +15,7 @@ class ParticleJelly extends Particle {
   //Constructor.
   ParticleJelly(PVector location_, PVector velocity_, PVector acceleration_, float mass_) {
     //Call the parent constructor.
-    super(location_, velocity_, acceleration_, mass_);
+   super(location_, velocity_, acceleration_, mass_);
     
     //Default start of the jellyfish, to be changed.
     //location = new PVector(width/2, height/2);

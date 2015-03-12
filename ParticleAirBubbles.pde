@@ -2,9 +2,9 @@
 class ParticleAirBubbles extends Particle {
 
   //Constructor.
-  ParticleAirBubbles(PVector location_, PVector velocity_, float mass_) {
+  ParticleAirBubbles(PVector location_, PVector velocity_, PVector acceleration_, float mass_) {
     //Call the parent constructor.
-    super( location_, velocity_, mass_);
+    super(location_, velocity_, acceleration_, mass_);
   }
 
   //Update and add forces.

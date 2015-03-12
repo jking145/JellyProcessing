@@ -12,9 +12,9 @@ class ParticleNode extends Particle {
   color fillColor = 255;
 
   //Constructor.
-  Node(PVector location_, PVector velocity_, PVector acceleration_, float nodeSize_) {
+  ParticleNode(PVector location_, PVector velocity_, PVector acceleration_, float nodeSize_) {
     //Call the parent constructor.
-    super( location_, velocity_, acceleration_, mass_);
+    super(location_, velocity_, acceleration_, nodeSize_);
 
     location = location_.get();
     nodeSize = nodeSize_;
@@ -77,7 +77,7 @@ class ParticleNode extends Particle {
     velocity.limit(5);
 
     //Adds velocity to the origin.
-    origin.add(velocity);
+    location.add(velocity);
 
     //Resets acceleration.
     acceleration.mult(0);

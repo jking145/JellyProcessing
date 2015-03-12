@@ -1,14 +1,14 @@
 //Current Class.
 //Made from multiple nodes.
 
-class ParticleSystemCurrent extends ParticleSystem {
+class ParticleSystemCurrent  {
 
   //Stores width and height.
   
   //float currentHeight;
 
   //ArrayList stores each node.
-  ArrayList<Node> nodes = new ArrayList<Node>();
+  ArrayList<ParticleNode> nodes = new ArrayList<ParticleNode>();
 
   //Current size.
   float currentWidth;
@@ -20,8 +20,8 @@ class ParticleSystemCurrent extends ParticleSystem {
   boolean isOnScreen=false;
 
   //Constructor.
-  ParticleSystemCurrent(PVector origin_) {
-    super(origin_);
+  ParticleSystemCurrent(PVector location_, PVector velocity_) {
+   // super(location_);
     //currentHeight = currentHeight_;
 
     //Adds nodes to the array list as long as the current is not the size of the width.
@@ -33,8 +33,9 @@ class ParticleSystemCurrent extends ParticleSystem {
         float tempSize = random(100);
         float nodePosOffset = random(-tempSize, tempSize);
 
+
         //Adds a node object to the ArrayList, randomizes the position of each node.
-        nodes.add(new Node(new PVector(0, (height/2)+nodePosOffset), tempSize));
+        nodes.add(new ParticleNode(new PVector(0, (height/2)+nodePosOffset), new PVector(0,0), new PVector(0,0), tempSize));
 
         //Adds the size of the node to the size counter of the current.
         currentWidth += tempSize;
@@ -50,7 +51,7 @@ class ParticleSystemCurrent extends ParticleSystem {
         float nA = nodes.get(nodes.size()-1).getLocation().x-nodes.get(nodes.size()-1).getNodeSize()/2;
 
         //Adds nodes after the first one. Will be random but without overlapping.
-        nodes.add(new Node(new PVector(nA-(tempSize/2), (height/2)+nodePosOffset), tempSize));
+        nodes.add(new ParticleNode(new PVector(nA-(tempSize/2), (height/2)+nodePosOffset), new PVector(0,0), new PVector(0,0), tempSize));
 
         //Adds the size of the node to the size counter of the current.
         currentWidth += tempSize;
@@ -108,7 +109,7 @@ class ParticleSystemCurrent extends ParticleSystem {
   }
 
   //Tracks if the jellfish is touching a node or not.
-  boolean collidesWith(JellyFish jelly, float tempNodeX, float tempNodeY, float radius) {
+  boolean collidesWith(ParticleJelly jelly, float tempNodeX, float tempNodeY, float radius) {
     //Distance between a node and the jellyfish.
     float distance = dist(tempNodeX, tempNodeY, jelly.getLocation().x, jelly.getLocation().y);
 
@@ -138,9 +139,9 @@ class ParticleSystemCurrent extends ParticleSystem {
   }
 
   //Gets the largest node.
-  Node getLargestNodeInCurrent() {
+  ParticleNode getLargestNodeInCurrent() {
     //Stores the size of the first node.
-    Node maxNode = nodes.get(0);
+    ParticleNode maxNode = nodes.get(0);
 
     //Iterates through the array list.
     for (int i = 1; i < nodes.size ()-1; i++) {

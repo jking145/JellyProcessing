@@ -2,8 +2,8 @@
 class ParticleSystemSwarm extends ParticleSystem {
 
   //Get the particle origin.
-  ParticleSystemSwarm(PVector origin_) {
-    super(origin_);
+  ParticleSystemSwarm(PVector location_, PVector velocity_) {
+    super(location_, velocity_);
   }
 
   //Apply friction.
@@ -29,7 +29,7 @@ class ParticleSystemSwarm extends ParticleSystem {
 
   //Draw particles to the screen.
   Particle createParticle() {
-    return new ParticlePlankton(origin, PVector.random2D(), 1);
+    return new ParticlePlankton(location, PVector.random2D(), new PVector (0,0), 1);
   }
 }
 

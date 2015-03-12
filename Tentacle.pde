@@ -42,21 +42,21 @@ class Tentacle {
   //Draws tentacles of the jellyfish.
   void drawTentacle() {
     //Tentacle starting point. 
-    float tentacleOriginX; 
-    float tentacleOriginY;
-    tentacleOriginX = 0;
+    float tentacleLocationX; 
+    float tentacleLocationY;
+    tentacleLocationX = 0;
     pushMatrix();
 
     //Position.
     translate(jelly.location.x, jelly.location.y);
 
 
-    while (tentacleOriginX < tLength) {
+    while (tentacleLocationX < tLength) {
       //Maps the size of each ellipse.
-      float radius = map(tentacleOriginX, 0, tLength, 15, 1);
+      float radius = map(tentacleLocationX, 0, tLength, 15, 1);
 
       //Maps the amplitude of the wave depending on tentacle length.
-      float ampMap = map(tentacleOriginX, 0, tLength, 0, 1);
+      float ampMap = map(tentacleLocationX, 0, tLength, 0, 1);
 
       //Distance is multiplied by the origin point of the tentacle. 
       //Speed is added. 
@@ -64,24 +64,24 @@ class Tentacle {
       //tentacleOriginY = sin(dist[0]*tentacleOriginX+speed)*amp[0] + sin(dist[1]*tentacleOriginX+speed)*amp[1] + sin(dist[2]*tentacleOriginX+speed)*amp[2];
 
       //Sofian edit.
-      tentacleOriginY = 0;
+      tentacleLocationY = 0;
       for (int i=0; i<dist.length; i++) {
-        tentacleOriginY+=sin(dist[i]*tentacleOriginX+speed)*amp[i];
+        tentacleLocationY+=sin(dist[i]*tentacleLocationX+speed)*amp[i];
       }
 
       //Multiplies the sine wave by mapped amplitude.
-      tentacleOriginY = tentacleOriginY*ampMap;
+      tentacleLocationY = tentacleLocationY*ampMap;
 
       //Aesthetic details.
       strokeWeight(1);
       stroke(219, 177, 255, alpha);
       noFill();
-      ellipse(tentacleOriginX, tentacleOriginY, radius, radius);
+      ellipse(tentacleLocationX, tentacleLocationY, radius, radius);
 
       //Determines the size of the ellipses . 
       if (radius>10)
         tSize = radius/3;
-      tentacleOriginX += tSize;
+      tentacleLocationX += tSize;
     }
     popMatrix();
   }

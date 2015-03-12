@@ -2,8 +2,8 @@
 class ParticleSystemJellies extends ParticleSystem {
   
   //Get the particle origin.
-  ParticleSystemJellies(PVector origin_) {
-    super(origin_);
+  ParticleSystemJellies(PVector location_, PVector velocity_) {
+    super(location_, velocity_);
   }
 
   //Apply float.
@@ -16,6 +16,6 @@ class ParticleSystemJellies extends ParticleSystem {
 
   //Draw particles to the screen.
   Particle createParticle() {
-    return new ParticleJelly(origin, PVector.random2D(), 1);
+    return new ParticleJelly(location, PVector.random2D(), new PVector (0,0), 1);
   }
 }

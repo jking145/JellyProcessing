@@ -8,15 +8,15 @@ class Wave {
   int xspacing = 1; // How far apart should each horizontal location be spaced
   int w;            // Width of entire wave
 
-  PVector origin;          // Where does the wave's first point start
+  PVector location;          // Where does the wave's first point start
   float theta = 0.0;       // Start angle at 0
   float amplitude;         // Height of wave
   float period;            // How many pixels before the wave repeats
   float dx;                // Value for incrementing X, to be calculated as a function of period and xspacing
   float[] yvalues;         // Using an array to store height values for the wave (not entirely necessary)
 
-  Wave(PVector o, int w_, float a, float p) {
-    origin = o.get();
+  Wave(PVector l, int w_, float a, float p) {
+    location = l.get();
     w = w_;
     period = p;
     amplitude = a;
@@ -42,12 +42,13 @@ class Wave {
     for (int x = 0; x < yvalues.length; x++) {
       noStroke();
       fill(255);
-      rect(origin.x+x*xspacing, origin.y+yvalues[x], 1, 1);
+      rect(location.x+x*xspacing, location.y+yvalues[x], 1, 1);
     }
   }
 
-  //void update() {
-  //  origin.y+=random(-10,10);
-  //}
+  //THIS IS SO SILLY it's ridiculous. Let's just keep it in there for a good laugh.
+//  void update() {
+//    location.y+=random(-10,10);
+//  }
 }
 

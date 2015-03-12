@@ -11,7 +11,7 @@ class Particle {
   float mass;
 
   //Constructor for class Particle.
-  Particle(PVector location_, PVector velocity_, float mass_) {
+  Particle(PVector location_, PVector velocity_, PVector acceleration_, float mass_) {
     acceleration = new PVector(0, 0);
     velocity = velocity_.get();
     location = location_.get();
