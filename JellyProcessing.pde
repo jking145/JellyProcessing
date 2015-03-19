@@ -37,6 +37,8 @@ void draw() {
 //      wave.update();
 //   }
 
+PVector mouse = new PVector(mouseX, mouseY);
+ 
   wave.calculate();
   wave.display();
 
@@ -46,6 +48,7 @@ void draw() {
 
  jelly.display();
  jelly.update();
+ jelly.arrive(mouse);
 
   //Stores the node that the jellyfish is touching.
   ParticleNode collidingNode = current.isInCurrent(jelly);
@@ -56,7 +59,9 @@ void draw() {
     //Applies the attraction force between the jelly and the colliding node.
     PVector attractForceWithCollidingNode = collidingNode.attract(jelly);
     jelly.applyForce(attractForceWithCollidingNode);
-  } else {
+  } 
+  
+  else {
     //Applies the mouse tracking as a force.
     PVector mForce = jelly.getMouseAttractionForce(mouseX, mouseY);
     jelly.applyForce(mForce);

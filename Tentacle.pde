@@ -15,6 +15,8 @@ class Tentacle {
 
   //Size of ellipses.
   float tSize;
+  
+ // float tRotate;
 
   //Opacity.
   int alpha;
@@ -28,6 +30,9 @@ class Tentacle {
       //Amplitude of the wave.
       amp[i] = random(2, 30);
     }
+    
+    //RE-ADDITION OF rotate function to the code
+    //tRotate = HALF_PI;
 
     //Adds a general cosine wave.
     float scale = cos(HALF_PI)+1;
@@ -48,8 +53,8 @@ class Tentacle {
     pushMatrix();
 
     //Position.
-    translate(jelly.location.x, jelly.location.y);
-
+    translate(0, 0);
+  // rotate(tRotate);
 
     while (tentacleLocationX < tLength) {
       //Maps the size of each ellipse.
