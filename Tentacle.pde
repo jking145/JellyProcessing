@@ -20,6 +20,8 @@ class Tentacle {
 
   //Opacity.
   int alpha;
+  
+ // float tRotate;
 
   //Constructor.
   Tentacle() {
@@ -32,7 +34,7 @@ class Tentacle {
     }
     
     //RE-ADDITION OF rotate function to the code
-    //tRotate = HALF_PI;
+   // tRotate = HALF_PI;
 
     //Adds a general cosine wave.
     float scale = cos(HALF_PI)+1;
@@ -54,7 +56,7 @@ class Tentacle {
 
     //Position.
     translate(0, 0);
-  // rotate(tRotate);
+    //rotate(tRotate);
 
     while (tentacleLocationX < tLength) {
       //Maps the size of each ellipse.

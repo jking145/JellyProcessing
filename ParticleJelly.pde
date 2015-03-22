@@ -136,7 +136,7 @@ class ParticleJelly extends Particle {
   // A method that calculates a steering force towards a target
   // STEER = DESIRED MINUS VELOCITY
   void arrive(PVector target) {
-    PVector desired = PVector.sub(target, location);  // A vector pointing from the location to the target
+  PVector desired = PVector.sub(target, location);  // A vector pointing from the location to the target
     float d = desired.mag();
     // Normalize desired and scale with arbitrary damping within 100 pixels
     desired.normalize();
